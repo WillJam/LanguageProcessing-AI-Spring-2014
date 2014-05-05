@@ -1,0 +1,90 @@
+AI, Spring 2014, Assignment 5
+Due at classtime, 30 April.
+
+WHAT TO TURN IN
+
+* Your modified version of hw5.py.
+* Your answers for part I in a text or PDF file.
+
+PART I (30 points): Problems
+Part II (70 points): Implementation
+Part III (50 points): Performance on test data
+Part IV (50 points): Extra credit
+
+Part I:
+23.3 a, b
+23.6 - just answer which grammar parses this sentence, and show its parse
+tree.
+23.10
+
+Part II:
+
+Hidden Markov Model part-of-speech tagging.
+
+In this assignment, you will implement the Viterbi algorithm discussed in 
+class, to build a part-of-speech tagger.  I am providing you with several
+files as part of this assignment:
+
+* tagset.txt - a text file describing the part-of-speech tagset we will use
+
+* train, devtest, test - three files containing the data your tagger will
+  process.  You should plan to train on the 'train' file, and test during
+  development on the 'devtest' file.  Your score will be based on the
+  performance of your model on the 'test' file (but with the labels,
+  which you don't have).
+
+* hw5.py: Driver code to train and predict on the above files,
+  as well as stubs for the key functions you need to implement.
+
+* test_hw5.py: Unit tests for the previous file
+
+* eval.py: A script to evaluate your model's performance on unseen data.
+
+Basic usage is either
+
+python hw5.py train devtest
+(to print the predictions of the model on the devtest data)
+or
+python eval.py train devtest
+(to print the score)
+
+* You must implement the following functions (provided as stubs) in hw5.py:
+  BaselineModel.__init__
+    - learns baseline (most-frequent-word) tagger from labeled data
+  HiddenMarkovModel.train
+    - learns hidden markov model probabilities from a labeled training corpus.
+  HiddenMarkovModel.compute_lattice
+    - computes the Viterbi lattice on a test sentence
+  HiddenMarkovModel.find_best_path
+    - finds the best backwards path through a learned lattice
+
+  You must implement add-one smoothing and most-frequent-part-of-speech
+  unknown-word handling.  For extra credit, you can implement more complex
+  methods.
+
+* You can modify hw5.py however you like, but the existing unit tests
+  must pass for full credit.
+
+Part III:
+  50 points of your score will be the based on the performance of your
+  chosen best model on the test data.  100% => 50 points, 90% => 45 points,
+  etc.
+
+  You should modify the default parameters to HiddenMarkovModel.train
+  to whichever parameters you believe will result in the best performance
+  of your model on the test data.
+
+  eval.py will output this.
+
+Part IV:
+  You are required to implement a basic bigram HMM with add-one smoothing.
+  For extra credit, you can add one or more of the following tweaks:
+
+  (25 points): Correctly implement a trigram HMM.  No test cases are
+    provided; your model must correctly handle the order=2 parameter.
+
+  (20 points): Implement better handling of unknown words.
+     You'll get points based on improving the unknown word score
+     on the evaluation above 60% (see scorer).
+     
+  Finally, 5 points will be given to the best performing model in the class.
